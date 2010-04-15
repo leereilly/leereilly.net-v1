@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title><%= @title %></title>
+<%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js' %>
+<%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.5.2/jquery-ui.min.js' %>
+<%= javascript_include_tag 'bubbleup.jquery.js' %>
+<%= javascript_include_tag 'jquery.prettyPhoto.js' %>
+<%= javascript_include_tag 'konami_code.js' %>
+<%= stylesheet_link_tag('style', :media => "all") %>
+<%= stylesheet_link_tag('prettyPhoto', :media => "all") %>
+<script type="text/javascript">
+(function($) {
+    
+    function shuffle(a) {
+        var i = a.length, j;
+        while (i) {
+            var j = Math.floor((i--) * Math.random());
+            var t = a[i];
+            a[i] = a[j];
+            a[j] = t;
+        }
+    }
+    
+    function randomAlphaNum() {
+        var rnd = Math.floor(Math.random() * 62);
+        if (rnd >= 52) return String.fromCharCode(rnd - 4);
+        else if (rnd >= 26) return String.fromCharCode(rnd + 71);
+        else return String.fromCharCode(rnd + 65);
+    }
+    
+    $.fn.rot13 = function() {
+        this.each(function() {
+            $(this).text($(this).text().replace(/[a-z0-9]/ig, function(chr) {
+                var cc = chr.charCodeAt(0);
+                if (cc >= 65 && cc <= 90) cc = 65 + ((cc - 52) % 26);
+                else if (cc >= 97 && cc <= 122) cc = 97 + ((cc - 84) % 26);
+                else if (cc >= 48 && cc <= 57) cc = 48 + ((cc - 43) % 10);
+                return String.fromCharCode(cc);
+            }));
+        });
+        return this;
+    };
+    
+    $.fn.scrambledWriter = function() {
+        this.each(function() {
+            var $ele = $(this), str = $ele.text(), progress = 0, replace = /[^\s]/g,
+                random = randomAlphaNum, inc = 3;
+            $ele.text('');
+            var timer = setInterval(function() {
+                $ele.text(str.substring(0, progress) + str.substring(progress, str.length - 1).replace(replace, random));
+                progress += inc
+                if (progress >= str.length + inc) clearInterval(timer);
+            }, 100);
+        });
+        return this;
+    };
+    
+    $.fn.typewriter = function() {
+        this.each(function() {
+            var $ele = $(this), str = $ele.text(), progress = 0;
+            $ele.text('');
+            var timer = setInterval(function() {
+                $ele.text(str.substring(0, progress++) + (progress & 1 ? '_' : ''));
+                if (progress >= str.length) clearInterval(timer);
+            }, 100);
+        });
+        return this;
+    };
+    
+    $.fn.unscramble = function() {
+        this.each(function() {
+            var $ele = $(this), str = $ele.text(), replace = /[^\s]/,
+                state = [], choose = [], reveal = 25, random = randomAlphaNum;
+            
+            for (var i = 0; i < str.length; i++) {
+                if (str[i].match(replace)) {
+                    state.push(random());
+                    choose.push(i);
+                } else {
+                    state.push(str[i]);
+                }
+            }
+            
+            shuffle(choose);
+            $ele.text(state.join(''));
+            
+            var timer = setInterval(function() {
+                var i, r = reveal;
+                while (r-- && choose.length) {
+                    i = choose.pop();
+                    state[i] = str[i];
+                }
+                for (i = 0; i < choose.length; i++) state[choose[i]] = random();
+                $ele.text(state.join(''));
+                if (choose.length == 0) clearInterval(timer);
+            }, 100);
+        });
+        return this;
+    };
+    
+})(jQuery);
+
+(function($) {
+
+	$.fn.konami = function(callback, code) {
+		if(code == undefined) code = "38,38,40,40,37,39,37,39,66,65";
+		
+		return this.each(function() {
+			var kkeys = [];
+			$(this).keydown(function(e){
+				kkeys.push( e.keyCode );
+				if ( kkeys.toString().indexOf( code ) >= 0 ){
+					$(this).unbind('keydown', arguments.callee);
+					callback(e);
+				}
+			}, true);
+		});
+	}
+
+})(jQuery);
+
+  $(function(){
+    $("ul#menu li img").bubbleup({tooltips: true});
+  });
+  
+   $(document).ready(function() {
+
+     $("#about-link").click(function(){
+        $("#about").effect( "pulsate", 5,
+         300 );
+     });
+
+  });
+  
+  
+   $(document).ready(function() {
+
+     $("#contact-link").click(function(){
+        $("#content").effect( "pulsate", 5, 
+         300 );
+     });
+
+  });
+  
+	$(document).ready(function(){
+		$(window).konami(function(){
+			alert('My XBOX live gamertag / Playstation Network handle is leereillyDOTnet');
+		});
+	});
+  
+  jQuery(document).ready(function($) {
+
+  $("a[rel^='prettyPhoto']").prettyPhoto({
+
+  });
+  });  
+  
+</script>
+
+<script type="text/javascript">
+
+if (document.all||document.getElementById){
+var thetitle=document.title
+document.title=''
+}
+
+////Animation code below
+////based on script from http://wsabstract.com/script/script2/statusanimate.shtml
+
+var data="GCAT";
+
+var done=1;
+function statusIn(text){
+	decrypt(text,7,100);
+}
+
+function statusOut(){
+self.status='';
+done=1;
+}
+
+
+function decrypt(text, max, delay){
+	if (done){
+		done = 0;
+		decrypt_helper(text, max, delay,  0, max);
+		}
+	
+}
+
+function decrypt_helper(text, runs_left, delay, charvar, max){
+	if (!done){
+	runs_left = runs_left - 1;
+	var status = text.substring(0,charvar);
+	for(var current_char = charvar; current_char < text.length; current_char++){
+		status += data.charAt(Math.round(Math.random()*data.length));
+		}
+	document.title = status;
+	var rerun = "decrypt_helper('" + text + "'," + runs_left + "," + delay + "," + charvar + "," + max + ");"
+	var new_char = charvar + 1;
+	var next_char = "decrypt_helper('" + text + "'," + max + "," + delay + "," + new_char + "," + max + ");"
+	if(runs_left > 0){
+		setTimeout(rerun, delay);
+		}
+	else{
+		if (charvar < text.length){
+			setTimeout(next_char, Math.round(delay*(charvar+3)/(charvar+1)));
+			}
+		else
+			{
+			done = 1;
+			}
+		}
+	}
+}
+
+//if IE 4+ or NS 6+
+if (document.all||document.getElementById)
+statusIn(thetitle)
+$(document).ready(function() {
+  $("#title").scrambledWriter();
+}
+</script>
+
+</head>
+<body>
+  <a href="http://github.com/leereilly">
+    <img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" />
+  </a>
+
+<div id="wrapper">
+  <div id="header">
+    <div id="logo">
+      <h1 id="title"><%= @title %></h1>
+      <p>{ 'software engineer', 'software developer', 'web developer' }</p>
+   </div>
+
+  <div id="topright">
+    <ul>
+      <li><a href="#" id="about-link">about</a></li>
+      <li><a href="#" id="contact-link">contact</a></li>
+    </ul>
+  </div>
+  <div class="cleared"></div>
+</div>
+<!-- Closes header -->
+<div class="lee-pulse">
+<p>123</p>
+</div>

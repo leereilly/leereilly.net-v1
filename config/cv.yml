@@ -1,0 +1,42 @@
+languages:
+  short: [BASIC, C, Python]
+  tall: [Perl, JavaScript]
+  grand: [Ruby]
+  venti: [Java, PHP, XHTML]
+  
+frameworks:
+  short: [Spring]
+  tall: [CodeIgniter, Zope]
+  grand: [Rails]
+  venti: [JUnit, PHPUnit, TestUnit]]
+  
+content_management_systems:  
+  short: [ExpressionEngine]
+  tall: [Joomla]
+  grand: [Drupal]
+  venti: [Wordpress]
+  
+databases:
+  short: [Gadfly]
+  tall: [Sybase, SQLite]
+  grand: [MySQL, Oracle]
+  venti: []
+  
+operating_systems:
+  short: []
+  tall: []
+  grand: []
+  venti: [Windows, Mac OSX, Linux, UNIX
+     
+buzzwords_and_other_bits:
+   short: []
+   tall: [Jquery]
+   grand: [project management]
+   venti: [agile, tdd, bdd]  
+   
+employers:
+  short: [Xynergy Inc., Deep Web Technologies, Department of Homeland Security]
+  tall: [New Mexico State Government]
+  grand: [Lawrence Livermore National Laboratory]
+  venti: [Joint Genome Institute, Los Alamos National Laboratory]
+  

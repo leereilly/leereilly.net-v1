@@ -1,0 +1,27 @@
+# Ignore any .DS_Store files; WTF @ http://en.wikipedia.org/wiki/.DS_Store
+.DS_Store
+
+# Ignore any files with ~ (thanks Emacs)
+*~
+
+# Ignore any swap files too while we're at it
+*.swp
+*.SWP
+
+# Ignore temporary, log and PID files
+tmp/**/*
+*.pid 
+log/*.log
+*.log
+*.cache
+
+# Ignore database config and any SQLite files
+config/database.yml
+db/*.sqlite3
+
+# Ignore the coverage directory
+coverage
+
+# Meh
+doc/api
+doc/app
