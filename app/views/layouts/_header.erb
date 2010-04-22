@@ -5,9 +5,9 @@
 <title><%= @title %></title>
 <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js' %>
 <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.5.2/jquery-ui.min.js' %>
-<%= javascript_include_tag 'bubbleup.jquery.js' %>
+<%= javascript_include_tag 'jquery.bubbleup.js' %>
 <%= javascript_include_tag 'jquery.prettyPhoto.js' %>
-<%= javascript_include_tag 'konami_code.js' %>
+<%= javascript_include_tag 'jquery.konamiCode.js' %>
 <%= stylesheet_link_tag('style', :media => "all") %>
 <%= stylesheet_link_tag('prettyPhoto', :media => "all") %>
 <script type="text/javascript">
@@ -100,25 +100,6 @@
         return this;
     };
     
-})(jQuery);
-
-(function($) {
-
-	$.fn.konami = function(callback, code) {
-		if(code == undefined) code = "38,38,40,40,37,39,37,39,66,65";
-		
-		return this.each(function() {
-			var kkeys = [];
-			$(this).keydown(function(e){
-				kkeys.push( e.keyCode );
-				if ( kkeys.toString().indexOf( code ) >= 0 ){
-					$(this).unbind('keydown', arguments.callee);
-					callback(e);
-				}
-			}, true);
-		});
-	}
-
 })(jQuery);
 
   $(function(){
