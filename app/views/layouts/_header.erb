@@ -5,103 +5,15 @@
 <title><%= @title %></title>
 <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js' %>
 <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.5.2/jquery-ui.min.js' %>
+<%= javascript_include_tag 'jquery.textEffects.js' %>
 <%= javascript_include_tag 'jquery.bubbleup.js' %>
 <%= javascript_include_tag 'jquery.prettyPhoto.js' %>
 <%= javascript_include_tag 'jquery.konamiCode.js' %>
+
 <%= stylesheet_link_tag('style', :media => "all") %>
 <%= stylesheet_link_tag('prettyPhoto', :media => "all") %>
-<script type="text/javascript">
-(function($) {
-    
-    function shuffle(a) {
-        var i = a.length, j;
-        while (i) {
-            var j = Math.floor((i--) * Math.random());
-            var t = a[i];
-            a[i] = a[j];
-            a[j] = t;
-        }
-    }
-    
-    function randomAlphaNum() {
-        var rnd = Math.floor(Math.random() * 62);
-        if (rnd >= 52) return String.fromCharCode(rnd - 4);
-        else if (rnd >= 26) return String.fromCharCode(rnd + 71);
-        else return String.fromCharCode(rnd + 65);
-    }
-    
-    $.fn.rot13 = function() {
-        this.each(function() {
-            $(this).text($(this).text().replace(/[a-z0-9]/ig, function(chr) {
-                var cc = chr.charCodeAt(0);
-                if (cc >= 65 && cc <= 90) cc = 65 + ((cc - 52) % 26);
-                else if (cc >= 97 && cc <= 122) cc = 97 + ((cc - 84) % 26);
-                else if (cc >= 48 && cc <= 57) cc = 48 + ((cc - 43) % 10);
-                return String.fromCharCode(cc);
-            }));
-        });
-        return this;
-    };
-    
-    $.fn.scrambledWriter = function() {
-        this.each(function() {
-            var $ele = $(this), str = $ele.text(), progress = 0, replace = /[^\s]/g,
-                random = randomAlphaNum, inc = 3;
-            $ele.text('');
-            var timer = setInterval(function() {
-                $ele.text(str.substring(0, progress) + str.substring(progress, str.length - 1).replace(replace, random));
-                progress += inc
-                if (progress >= str.length + inc) clearInterval(timer);
-            }, 100);
-        });
-        return this;
-    };
-    
-    $.fn.typewriter = function() {
-        this.each(function() {
-            var $ele = $(this), str = $ele.text(), progress = 0;
-            $ele.text('');
-            var timer = setInterval(function() {
-                $ele.text(str.substring(0, progress++) + (progress & 1 ? '_' : ''));
-                if (progress >= str.length) clearInterval(timer);
-            }, 100);
-        });
-        return this;
-    };
-    
-    $.fn.unscramble = function() {
-        this.each(function() {
-            var $ele = $(this), str = $ele.text(), replace = /[^\s]/,
-                state = [], choose = [], reveal = 25, random = randomAlphaNum;
-            
-            for (var i = 0; i < str.length; i++) {
-                if (str[i].match(replace)) {
-                    state.push(random());
-                    choose.push(i);
-                } else {
-                    state.push(str[i]);
-                }
-            }
-            
-            shuffle(choose);
-            $ele.text(state.join(''));
-            
-            var timer = setInterval(function() {
-                var i, r = reveal;
-                while (r-- && choose.length) {
-                    i = choose.pop();
-                    state[i] = str[i];
-                }
-                for (i = 0; i < choose.length; i++) state[choose[i]] = random();
-                $ele.text(state.join(''));
-                if (choose.length == 0) clearInterval(timer);
-            }, 100);
-        });
-        return this;
-    };
-    
-})(jQuery);
 
+<script type="text/javascript">
   $(function(){
     $("ul#menu li img").bubbleup({tooltips: true});
   });
@@ -127,7 +39,7 @@
   
 	$(document).ready(function(){
 		$(window).konami(function(){
-			alert('My XBOX live gamertag / Playstation Network handle is leereillyDOTnet');
+			alert('My XBOX live gamertag / Playstation Network handle is leereillyDOTnet. Come get some!');
 		});
 	});
   
@@ -205,7 +117,7 @@
   <div id="header">
     <div id="logo">
       <h1 id="title"><%= @title %></h1>
-      <p>{ 'software engineer', 'software developer', 'web developer' }</p>
+      <p id="description">Software Developer Dude &lt;lee@leereilly.net&gt;</p>
    </div>
 
   <div id="topright">
@@ -218,5 +130,8 @@
 </div>
 <!-- Closes header -->
 <div class="lee-pulse">
-<p>123</p>
 </div>
+<center>
+  <p id="copyright">Copyright &copy; 1979 - <%= Time.new.year %> Lee Reilly</p>
+  <p id="nerdy_email_address">%w(lee leereilly.net) * "@" || %w(lreilly lbl.gov) * "@" || %w(reilly8 llnl.gov)</p>
+</center>
