@@ -31,15 +31,15 @@
    $(document).ready(function() {
 
      $("#contact-link").click(function(){
-        $("#content").effect( "pulsate", 5, 
-         300 );
+        $("#menu").effect( "pulsate", 5, 
+         300 );  
      });
 
   });
   
 	$(document).ready(function(){
 		$(window).konami(function(){
-			alert('My XBOX live gamertag / Playstation Network handle is leereillyDOTnet. Come get some!');
+			$.prettyPhoto.open('http://www.youtube.com/watch?v=GfO-0f8cjwk','NERD ALERT','My PSN and XBOX Live handle is <strong>leereillyDOTnet</strong> - come get some!');
 		});
 	});
   
@@ -109,15 +109,16 @@
 
 </head>
 <body>
-  <a href="http://github.com/leereilly">
+<div xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Person">
+<!--  <a href="http://github.com/leereilly">
     <img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" />
   </a>
-
+-->
 <div id="wrapper">
   <div id="header">
     <div id="logo">
-      <h1 id="title"><%= @title %></h1>
-      <p id="description">Software Developer Dude &lt;lee@leereilly.net&gt;</p>
+      <a href="http://www.leereilly.net" rel="v:url"><h1 id="title"><span property="v:name"><%= @title %></span></h1></a>
+      <h2 id="description"><span property="v:title">Software Developer</span></h2>
    </div>
 
   <div id="topright">
@@ -131,7 +132,3 @@
 <!-- Closes header -->
 <div class="lee-pulse">
 </div>
-<center>
-  <p id="copyright">Copyright &copy; 1979 - <%= Time.new.year %> Lee Reilly</p>
-  <p id="nerdy_email_address">%w(lee leereilly.net) * "@" || %w(lreilly lbl.gov) * "@" || %w(reilly8 llnl.gov)</p>
-</center>
