@@ -1,0 +1,11 @@
+development:
+  api_key: [API_KEY]
+  secret: [SECRET]
+  
+test:
+  api_key: [API_KEY]
+  secret: [SECRET]
+  
+production:
+  api_key: [API_KEY]
+  secret: [SECRET]
